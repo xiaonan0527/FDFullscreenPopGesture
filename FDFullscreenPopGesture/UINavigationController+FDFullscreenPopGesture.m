@@ -185,6 +185,11 @@ typedef void (^_FDViewControllerWillAppearInjectBlock)(UIViewController *viewCon
         return;
     }
     
+    NSString *className = [NSString stringWithUTF8String:class_getName([appearingViewController class])];
+    if ([className isEqualToString:@"CKSMSComposeController"]) {
+        return;
+    }
+    
     __weak typeof(self) weakSelf = self;
     _FDViewControllerWillAppearInjectBlock block = ^(UIViewController *viewController, BOOL animated) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
